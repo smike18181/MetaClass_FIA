@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<PMML xmlns="http://www.dmg.org/PMML-4_4" xmlns:data="http://jpmml.org/jpmml-model/InlineTable" version="4.4">
+	<Header>
+		<Application name="SkLearn2PMML package" version="0.102.0"/>
+		<Timestamp>2024-02-19T17:28:12Z</Timestamp>
+	</Header>
+	<MiningBuildTask>
+		<Extension name="repr">PMMLPipeline(steps=[('Regression', RobustScaler())])</Extension>
+	</MiningBuildTask>
+	<DataDictionary>
+		<DataField name="Age" optype="continuous" dataType="double"/>
+		<DataField name="Gender" optype="continuous" dataType="double"/>
+		<DataField name="MotionSickness" optype="continuous" dataType="double"/>
+		<DataField name="ImmersionLevel" optype="continuous" dataType="double"/>
+	</DataDictionary>
+	<TransformationDictionary>
+		<DerivedField name="robustScaler(Age)" optype="continuous" dataType="double">
+			<Apply function="/">
+				<Apply function="-">
+					<FieldRef field="Age"/>
+					<Constant dataType="double">39.0</Constant>
+				</Apply>
+				<Constant dataType="double">20.0</Constant>
+			</Apply>
+		</DerivedField>
+		<DerivedField name="robustScaler(Gender)" optype="continuous" dataType="double">
+			<Apply function="/">
+				<Apply function="-">
+					<FieldRef field="Gender"/>
+					<Constant dataType="double">1.0</Constant>
+				</Apply>
+				<Constant dataType="double">2.0</Constant>
+			</Apply>
+		</DerivedField>
+		<DerivedField name="robustScaler(MotionSickness)" optype="continuous" dataType="double">
+			<Apply function="/">
+				<Apply function="-">
+					<FieldRef field="MotionSickness"/>
+					<Constant dataType="double">6.0</Constant>
+				</Apply>
+				<Constant dataType="double">5.0</Constant>
+			</Apply>
+		</DerivedField>
+		<DerivedField name="robustScaler(ImmersionLevel)" optype="continuous" dataType="double">
+			<Apply function="/">
+				<Apply function="-">
+					<FieldRef field="ImmersionLevel"/>
+					<Constant dataType="double">3.0</Constant>
+				</Apply>
+				<Constant dataType="double">2.0</Constant>
+			</Apply>
+		</DerivedField>
+	</TransformationDictionary>
+</PMML>
