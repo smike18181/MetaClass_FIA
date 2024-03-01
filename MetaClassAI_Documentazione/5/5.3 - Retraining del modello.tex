@@ -2,11 +2,10 @@
 \fancyhead{}    % reset header
 \fancyhead[R]{Retraining del modello}
 
-Una volta inserite le nuove istanze al termine della compilazione del questionario, il modello deve essere riallenato considerando i nuovi valori inseriti.
-Per fare ciò è stato necessario creare un modulo python che contenesse un interprete e un'ambiente virtuale in grado di installare i moduli e le liberie necessarie per l'esecuzione di un file python (trainingModel.py) contenente il codice necessario per fare ciò.
+Una volta inserite le nuove istanze al termine della compilazione del questionario, il modello deve essere \textbf{riallenato} considerando i nuovi valori inseriti.\vspace{1ex}
+Per fare ciò è stato necessario creare un \textbf{modulo python} che contenesse un \textbf{interprete} e \textbf{un'ambiente virtuale} in grado di installare tutte le liberie necessarie per l'esecuzione di un file python \textcolor{gray!50!black}{\textit{(trainingModel.py)}} contenente il codice necessario per fare ciò. \\ 
 
-\begin{bashCode}
-    \begin{tcolorbox}[colback=bgTitleRed, breakable, fontsize=\footnotesize]
+\begin{lstlisting}[caption=Prelievo del dataset]
     # coding: utf-8
     import pandas as pd
     
@@ -16,19 +15,33 @@ Per fare ciò è stato necessario creare un modulo python che contenesse un inte
     try:
         df = pd.read_csv(FILE_NAME)
     except pd.errors.EmptyDataError:
-        print("Il file CSV è vuoto.")
+        print("Il file CSV e' vuoto.")
     except pd.errors.ParserError:
         print("Errore di parsing del file CSV.")
     except Exception as e:
         print(e)
-    \end{tcolorbox}
-    \caption{Prelievo del dataset}
-    \label{lst:python_code}
-\end{bashCode}
-
+\end{lstlisting} 
 
 In questa parte si va a prelevare il dataset presente in una cartella specifica del nostro progetto.
-Tale dataset è stato estratto in formato csv e tramite il modulo pandas si andrà ad ottenere il DataFrame contente tutte le tuple del dataset.
-In caso di dataset vuoto viene ritornata un'eccezione (gestita dal metodo chiamante java) e stessa cosa succede per errori di parsing del file csv e per errori generici.
-%immagine feature preparation
-in quest'altra figura si applica
+Tale dataset è stato estratto in formato \textbf{csv} e tramite il modulo \textbf{pandas} si andrà ad ottenere il \textbf{DataFrame} contente tutte le tuple del dataset.\vspace{1ex}\\
+In caso di dataset vuoto viene ritornata un'eccezione (gestita dal metodo chiamante java) come succede anche per errori di \textbf{parsing} del file csv e per errori generici. \\
+
+\begin{lstlisting}[caption=Feature preparation]
+   from sklearn.ensemble import RandomForestRegressor
+   from sklearn.preprocessing import RobustScaler
+   from sklearn2pmml import sklearn2pmml
+   from sklearn2pmml.pipeline import PMMLPipeline
+
+   #Scelta variabile dipendente (y) e indipendenti (X)
+   X=df.drop(columns=['Duration','VRHeadset',"UserID"])   #feature selection
+   y=df.Duration
+
+   # Adattamento e trasformazione dei dati con RobustScaler
+   scaler = RobustScaler()
+   X_scaled = scaler.fit_transform(X)
+
+  # Creazione del modello di regressione con Random Forest
+  model = RandomForestRegressor()
+  model.fit(X_scaled, y)
+\end{lstlisting} 
+

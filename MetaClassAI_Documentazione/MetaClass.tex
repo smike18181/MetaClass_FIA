@@ -10,22 +10,27 @@
 \linespread{1.25}
 \usepackage{fancyhdr}
 \usepackage{amsmath}
-\usepackage{listings}
-\usepackage{tcolorbox}
+
 \usepackage{xcolor}
+\usepackage{listings}
+\usepackage{caption}
 
-% Definizione del colore di sfondo
-\definecolor{bgTitleRed}{RGB}{85,45,50}
+% Definisci i colori che desideri utilizzare
+\definecolor{codebackground}{rgb}{0.95,0.95,0.95}
+\definecolor{codeframe}{rgb}{0.75,0.75,0.75}
+\definecolor{codekeyword}{rgb}{0.37,0.08,0.25}
 
-% Configurazione dello stile del codice
-\lstdefinestyle{bashstyle}{
-    backgroundcolor=\color{bgTitleRed},
-    basicstyle=\ttfamily\footnotesize\color{white},
+% Impostazioni per il blocco di codice
+\lstset{
+    language=Python,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{codekeyword}\bfseries,
+    backgroundcolor=\color{codebackground},
+    frame=single,
+    rulecolor=\color{codeframe},
     breaklines=true,
-    frame=none,  % Rimuove il frame intorno al codice
-    numbers=left,
-    numberstyle=\tiny\color{white},
-    language=bash,
+    showstringspaces=false,
+    captionpos=b,
 }
 
 
@@ -53,27 +58,11 @@
 \fancyhf{}
 \fancyfoot[R]{\thepage}
 
-% CODE MODULES
-\usepackage{listings}
-\usepackage{xcolor}
-
-% Definisci uno stile per il codice
-\lstdefinestyle{mystyle}{
-    backgroundcolor=\color{gray!10},  % Colore di sfondo
-    basicstyle=\ttfamily\small,       % Stile del testo
-    breaklines=true,                  % Spezza le righe lunghe
-    frame=single,                     % Cornice singola attorno al codice
-    numbers=left,                     % Numeri di linea sulla sinistra
-    numberstyle=\tiny,                % Stile dei numeri di linea
-    numbersep=5pt,                    % Distanza tra numeri di linea e codice
-    xleftmargin=10pt,                 % Margine sinistro
-}
-
-% Imposta lo stile predefinito
-\lstset{style=mystyle}
-
 
 \begin{document}
+
+%caption dei listings è in bold
+\captionsetup[lstlisting]{labelfont={bf}}
 
 \begin{figure}[H]
     \centering

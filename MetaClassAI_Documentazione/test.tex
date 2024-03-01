@@ -1,0 +1,44 @@
+\documentclass{article}
+\usepackage{xcolor}
+\usepackage{listings}
+
+% Definisci i colori che desideri utilizzare
+\definecolor{codebackground}{rgb}{0.95,0.95,0.95}
+\definecolor{codeframe}{rgb}{0.75,0.75,0.75}
+\definecolor{codekeyword}{rgb}{0.37,0.08,0.25}
+
+% Impostazioni per il blocco di codice
+\lstset{
+    language=Python,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{codekeyword}\bfseries,
+    backgroundcolor=\color{codebackground},
+    frame=single,
+    rulecolor=\color{codeframe},
+    breaklines=true,
+    showstringspaces=false,
+    captionpos=b,
+}
+
+\begin{document}
+
+\begin{lstlisting}[caption=Esempio di codice Python]
+breakable, fontsize=\footnotesize]
+    # coding: utf-8
+    import pandas as pd
+    
+    FILE_NAME = "../src/main/resources/ModuloAI/data.csv"
+    
+    # Verifica il contenuto del file
+    try:
+        df = pd.read_csv(FILE_NAME)
+    except pd.errors.EmptyDataError:
+        print("Il file CSV è vuoto.")
+    except pd.errors.ParserError:
+        print("Errore di parsing del file CSV.")
+    except Exception as e:
+        print(e)
+\end{lstlisting}
+
+\end{document}
+
