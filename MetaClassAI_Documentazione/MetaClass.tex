@@ -1,18 +1,33 @@
 \documentclass[a4paper, twoside, openright]{article}
-\usepackage[T1]{fontenc} % Font encoding, T1 = it
-\usepackage[utf8]{inputenc} % Input encoding - per caratteri particolari
-\usepackage[english,italian]{babel} % Lingua principale italiano, con parti in inglese
-
-\usepackage{graphicx} % Per includere immagini esterne
-\usepackage{lipsum} % genera testo fittizio
-\usepackage[a4paper,top=3cm,bottom=3cm,left=3cm,right=3cm]{geometry} %impaginazione e margini documento
-\usepackage[fontsize=12pt]{scrextend} %dimensione font
-\raggedbottom % Se la pagina non è completa, lascia lo spazio alla fine
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english,italian]{babel}
+\usepackage{graphicx}
+\usepackage{lipsum}
+\usepackage[a4paper,top=3cm,bottom=3cm,left=3cm,right=3cm]{geometry}
+\usepackage[fontsize=12pt]{scrextend}
+\raggedbottom
 \linespread{1.25}
 \usepackage{fancyhdr}
-
-% Package for matrix
 \usepackage{amsmath}
+\usepackage{listings}
+\usepackage{tcolorbox}
+\usepackage{xcolor}
+
+% Definizione del colore di sfondo
+\definecolor{bgTitleRed}{RGB}{85,45,50}
+
+% Configurazione dello stile del codice
+\lstdefinestyle{bashstyle}{
+    backgroundcolor=\color{bgTitleRed},
+    basicstyle=\ttfamily\footnotesize\color{white},
+    breaklines=true,
+    frame=none,  % Rimuove il frame intorno al codice
+    numbers=left,
+    numberstyle=\tiny\color{white},
+    language=bash,
+}
+
 
 \pagestyle{fancy}
 \fancypagestyle{plain}{%
@@ -20,14 +35,10 @@
   \fancyhf{}%
 }
 
-% IMMAGINI 2%
 \usepackage{subfig}
-\usepackage{graphicx}
 \usepackage{float}
 \graphicspath{ {./images/} }
 
-% STILE LINK ESTERNI %
-\usepackage{xcolor}
 \definecolor{linkColor}{RGB}{2,11,120}
 \definecolor{printLinkColor}{RGB}{0,0,0}
 
@@ -36,37 +47,31 @@
   \href{#2}{#1}\footnote{\url{#2}}%
 }
 
-% FONT
 \usepackage{tgschola}
 
-% STILE BLOCCHI DI CODICE %
 \definecolor{bgTitleRed}{RGB}{85,45,50}
-\usepackage[T1]{fontenc}
-\usepackage[ttdefault=true]{AnonymousPro}
-\usepackage{listings}
-\usepackage{minted}
-\usepackage{tcolorbox}
-\tcbuselibrary{listings, breakable, minted, skins}
-\tcbset{listing engine=minted}
-
-\usepackage{fancyhdr}
-\pagestyle{fancy}
 \fancyhf{}
 \fancyfoot[R]{\thepage}
 
-\newtcblisting{bashCode}[2][]{
-    breakable,
-    listing only, #1 ,title=#2,
-    minted language=bash,
-    minted style=vs,
-    coltitle=white,
-    colbacktitle=bgTitleRed,
-    toptitle=3mm, bottomtitle=2.5mm,
-    top=2mm, bottom=3mm,
-    fonttitle=\ttfamily,
-    enhanced, frame hidden, 
-    minted options={fontfamily=AnonymousPro, 
-    tabsize=4, breaklines, autogobble, linenos=false}}
+% CODE MODULES
+\usepackage{listings}
+\usepackage{xcolor}
+
+% Definisci uno stile per il codice
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{gray!10},  % Colore di sfondo
+    basicstyle=\ttfamily\small,       % Stile del testo
+    breaklines=true,                  % Spezza le righe lunghe
+    frame=single,                     % Cornice singola attorno al codice
+    numbers=left,                     % Numeri di linea sulla sinistra
+    numberstyle=\tiny,                % Stile dei numeri di linea
+    numbersep=5pt,                    % Distanza tra numeri di linea e codice
+    xleftmargin=10pt,                 % Margine sinistro
+}
+
+% Imposta lo stile predefinito
+\lstset{style=mystyle}
+
 
 \begin{document}
 

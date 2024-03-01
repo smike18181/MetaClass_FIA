@@ -1,3 +1,34 @@
 \subsection{Retraining del modello}
 \fancyhead{}    % reset header
 \fancyhead[R]{Retraining del modello}
+
+Una volta inserite le nuove istanze al termine della compilazione del questionario, il modello deve essere riallenato considerando i nuovi valori inseriti.
+Per fare ciò è stato necessario creare un modulo python che contenesse un interprete e un'ambiente virtuale in grado di installare i moduli e le liberie necessarie per l'esecuzione di un file python (trainingModel.py) contenente il codice necessario per fare ciò.
+
+\begin{bashCode}
+    \begin{tcolorbox}[colback=bgTitleRed, breakable, fontsize=\footnotesize]
+    # coding: utf-8
+    import pandas as pd
+    
+    FILE_NAME = "../src/main/resources/ModuloAI/data.csv"
+    
+    # Verifica il contenuto del file
+    try:
+        df = pd.read_csv(FILE_NAME)
+    except pd.errors.EmptyDataError:
+        print("Il file CSV è vuoto.")
+    except pd.errors.ParserError:
+        print("Errore di parsing del file CSV.")
+    except Exception as e:
+        print(e)
+    \end{tcolorbox}
+    \caption{Prelievo del dataset}
+    \label{lst:python_code}
+\end{bashCode}
+
+
+In questa parte si va a prelevare il dataset presente in una cartella specifica del nostro progetto.
+Tale dataset è stato estratto in formato csv e tramite il modulo pandas si andrà ad ottenere il DataFrame contente tutte le tuple del dataset.
+In caso di dataset vuoto viene ritornata un'eccezione (gestita dal metodo chiamante java) e stessa cosa succede per errori di parsing del file csv e per errori generici.
+%immagine feature preparation
+in quest'altra figura si applica

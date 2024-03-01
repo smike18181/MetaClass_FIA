@@ -1,3 +1,10 @@
+\newpage
 \subsection{Feature scaling}
 \fancyhead{}    % reset header
 \fancyhead[R]{Feature scaling}
+Nella seconda fase ci siamo focalizzati sulla feature scaling ovvero l’insieme di tecniche che consentono di normalizzare o scalare l’insieme di valori di una caratteristica. Abbiamo utilizzato un metodo della libreria \texttt{sklearn} il quale ci ha permesso di scalare i valori delle variabili prese in considerazione. Sono state analizzate le prestazioni dell’agente in seguito alla tecnica di normalizzazione usata. Sono state prese in considerazione, la Z-Score Normalization, la MinMax Normalization e la Robust Scaling.
+\begin{itemize}
+    \item la Z-Score Normalization: \( x' = \frac{x - \mu}{\sigma} \) normalizza i valori in modo da avere la somma delle medie pari a 0 e la deviazione standard a 1.
+    \item la MinMax Normalization: normalizza i valori dei dati, in valori compresi fra \(a\) e \(b\).
+    \item la Robust Scaling: normalizzazione che rimuove la mediana e scala i dati in base al range interquartile.
+\end{itemize}
