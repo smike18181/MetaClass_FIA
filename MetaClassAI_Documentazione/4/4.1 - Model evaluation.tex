@@ -1,3 +1,20 @@
 \subsection{Model evaluation}
 \fancyhead{}    % reset header
 \fancyhead[R]{Model evaluation}
+
+In seguito alla definizione delle tecniche di ingegnerizzazione dei dati dell’agente intelligente, è necessario stabilire le \textbf{metriche} e le \textbf{tecniche} di validazione delle prestazioni dello
+stesso. Occorre suddividere l’insieme dei dati fin’ora analizzato in due insiemi: 
+\begin{itemize}
+\item \textbf{training set}:
+composto dalle istanze di dati che saranno utilizzate per l’addestramento.
+\item \textbf{test set}, composto dalle istanze di dati per cui l’agente dovrà predire il valore della variabile dipendente.
+\end{itemize}
+Abbiamo preso in considerazione diverse tecniche per effettuare questa suddivisione: \textit{K-Fold
+validation, Stratified K-fold validation, Repeated K-fold validation e Repeated Stratified
+K-fold validation}. In particolare, le tecniche \textit{Stratified K-fold} e \textit{Repeated Stratified} sono state
+scartate in quanto non risultano adatte ad essere applicate su dati continui e a dataset con più
+variabili indipendenti. \\ 
+Per tutte è stato necessario definire il valore di K, ovvero il numero
+di gruppi utilizzati per suddividere il dataset in test e training set, mentre per le tecniche di tipo "Repeated" è stato stabilito anche il numero di
+ripetizioni di validazione da effettuare. Le metriche che sono state impiegate per valutare la bontà delle
+previsioni effettuate sono state:

@@ -45,3 +45,35 @@ In caso di dataset vuoto viene ritornata un'eccezione (gestita dal metodo chiama
   model.fit(X_scaled, y)
 \end{lstlisting} 
 
+In quest altro blocco di codice si va a trasformare il dataset e i dati al suo interno per prepararli al \textbf{training} del modello. ( pragrafo \ref{paragrafo 3.1} per una descrizione più dettagliata). \vspace{1ex}\\ 
+Dopo aver applicato il \textbf{metodo empirico} su vari algoritmi e per ogni algortimo aver applicato \textbf{3 tipologie di scaling} diverse, si è visto che l'algoritmo che si adatta meglio ai dati è il \textbf{RandomForestRegressor} applicando però la \textbf{RobustScaler} sui dati.
+Per preparare i dati vi sono una serie di passi da seguire:
+\par{
+\begin{itemize}
+   \item \textbf{feature selection}: vengono selezionate le feature \textbf{caratterizzanti} del problema in esame: \textit{Age, Gender, MotionSickness, ImmersionLevel}. Feature come \textit{VRHeadset} non sono state considerate in quanto i visori che verranno utilizzati nelle lezioni virtuali hanno headset diversi dalle 3 tipologie presenti nel dataset. In più, il regressore dovrà stimare la durata ideale di un meeting in una determinata stanza e per fare ciò si basa sul \textit{MotionSickess} che racchiude tutti i fastidi provati durante meeting precedenti, incluso anche quello dell'headset. 
+   \item \textbf{feature scaling}: come detto prima, il \textbf{RobustScaler} consente di fare stime più accurate rispetto altri scaler. Da come si legge nel codice, viene applicato lo scaling su X che corrisponde all'insieme di tuple presenti nel dataset su cui è stata applicata la feature selection
+   \item \textbf{feature balancing e feature cleaning}: non 
+   sono stati applicati per i motivi descritti nel \textit{paragrafo \ref{paragrafo 3.1}}.
+\end{itemize}
+} \\ 
+
+\begin{lstlisting}[caption=Conversione in un file PMML]
+   # Creazione del PMMLPipeline con il modello già addestrato
+   pipeline = PMMLPipeline([("Regression", model)])
+
+   # Tentativo di estrazione del pipeline in un file PMML con gestione delle eccezioni
+   try:
+      sklearn2pmml(pipeline, "RegressoreDurataMeeting.pmml", with_repr=True)
+   except Exception as e:
+      print("Si è verificato un errore durante l'estrazione del pipeline in un file PMML:")
+      print(e)
+\end{lstlisting} 
+
+In quest'ultima parte si andrà a convertire il modello già addestrato in un \textbf{file PMML} che verrà utilizzato per compiere stime in un altro modulo di MetaClass (descritto nel paragrafo \ref{paragrafo 5.1}). \vspace{1ex} \\
+Per poter compiere la conversione è necessario creare una \textbf{pipeline} contenente il \textbf{modello addestrato}. l'istanza model inoltre conterrà anche tutti i dati del dataset con relativa separazione tra variabili dipendenti e indipendenti. \\
+Infine in blocco try/except si creare il file che verrà salvato nella directory corrente del modulo python appena descritto.
+
+
+
+
+
