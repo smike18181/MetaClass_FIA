@@ -1,7 +1,7 @@
 \subsection{Model evaluation}
 \fancyhead{}    % reset header
 \fancyhead[R]{Model evaluation}
-
+\label{paragrafo 4.1}
 In seguito alla definizione delle tecniche di ingegnerizzazione dei dati dell’agente intelligente, è necessario stabilire le \textbf{metriche} e le \textbf{tecniche} di validazione delle prestazioni dello
 stesso. Occorre suddividere l’insieme dei dati fin’ora analizzato in due insiemi: 
 \begin{itemize}
@@ -17,4 +17,15 @@ variabili indipendenti. \\
 Per tutte è stato necessario definire il valore di K, ovvero il numero
 di gruppi utilizzati per suddividere il dataset in test e training set, mentre per le tecniche di tipo "Repeated" è stato stabilito anche il numero di
 ripetizioni di validazione da effettuare. Le metriche che sono state impiegate per valutare la bontà delle
-previsioni effettuate sono state:
+previsioni effettuate sono state: \\
+\begin{equation}
+\text{MAE(Mean Absolute Error)} = \frac{1}{n} \sum_{i=1}^{n} \left| y_i - x_i \right|
+\end{equation}
+\vspace{1ex}
+\begin{equation}
+\text{MSE(Mean Squared Error)} = \frac{1}{n} \sum_{i=1}^{n} (y_i - x_i)^2
+\end{equation}
+\vspace{1ex}
+\begin{equation}
+\text{RMSE (Root Mean Squared Error)} = \sqrt{\frac{1}{n} \sum_{i=1}^{n} (y_i - x_i)^2}
+\end{equation}
