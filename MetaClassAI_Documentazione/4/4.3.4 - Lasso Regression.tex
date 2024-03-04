@@ -1,0 +1,33 @@
+\subsubsection{Lasso Regression}
+\fancyhead[]{}
+\fancyhead[R]{Lasso Regression}
+
+In seguito abbiamo analizzato l’algoritmo Lasso Regression, dove Lasso sta per "Least Absolute Selection Shrinkage Operator". Questo algoritmo infatti opera trovando e applicando un vincolo agli attributi del modello che porta i coefficienti di regressione per alcune variabili a diminuire verso lo zero. Le variabili con coefficiente di regressione pari a zero sono poi escluse dal modello. Questo algoritmo aiuta quindi a determinare quali dei predittori sono i più importanti.
+
+Per utilizzare questa tecnica è necessario definire un parametro "alpha", con valore numerico compreso tra 0 e $\infty$, dove per \textit{alpha = 0} la Lasso Regression si comporta come Linear Regression. La scelta di questo parametro è stata affidata alla funzione di Python \textit{linear\_model.Lasso()}.
+
+Si può notare come i risultati ottenuti utilizzando questa configurazione siano moto simili alla Linear Regression:
+
+\begin{table}[!htbp]
+    \centering
+    \caption{Lasso Regression}
+    \begin{tabular}{|c|c|c|c|c|c|c|}
+        \hline
+        Test & Regressor & Alg & Scaler & MAE & MSE & RMSE \\
+        \hline
+        1 & Lasso & KF & ZScore & 13.59636 & 248.80255 & 15.77305 \\
+        \hline
+        2 & Lasso & RKF & ZScore & 13.59176 & 248.96056 & 15.77076 \\
+        \hline
+        3 & Lasso & KF & MinMax & 13.59636 & 248.80255 & 15.77305 \\
+        \hline
+        4 & Lasso & RKF & MinMax & 13.59176 & 248.96056 & 15.77076 \\
+        \hline
+        5 & Lasso & KF & Robust & 13.59636 & 248.80255 & 15.77305 \\
+        \hline
+        6 & Lasso & RKF & Robust & 13.59176 & 248.96056 & 15.77076 \\
+        \hline
+    \end{tabular}
+    \label{tab:random_forest}
+\end{table} 
+

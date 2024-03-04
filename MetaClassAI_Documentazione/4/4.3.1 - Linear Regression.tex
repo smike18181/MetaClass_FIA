@@ -1,3 +1,32 @@
 \subsubsection{Linear Regression}
 \fancyhead[]{}
 \fancyhead[R]{Linear Regression}
+
+Un regressore lineare, o modello di regressione lineare, cerca di modellare la relazione tra una variabile dipendente e una o più variabili indipendenti attraverso una \textbf{funzione lineare}. \\
+Applicando la funzione di generazione del modello vista nel paragrafo \ref{paragrafo 4.3} sono stati ottenuti questi risultati:
+\begin{table}[!htbp]
+    \centering
+    \caption{Linear Regression}
+    \begin{tabular}{|c|c|c|c|c|c|c|}
+        \hline
+        Test & Regressor & Alg & Scaler & MAE & MSE & RMSE \\
+        \hline
+        1 & Linear & KF & ZScore & 13.61091 & 249.70188 & 15.79693 \\
+        \hline
+        2 & Linear & RKF & ZScore & 13.63839 & 250.71404 & 15.82796 \\
+        \hline
+        3 & Linear & KF & MinMax & 13.61091 & 249.70188 & 15.79693 \\
+        \hline
+        4 & Linear & RKF & MinMax & 13.63839 & 250.71404 & 15.82796 \\
+        \hline
+        5 & Linear & KF & Robust & 13.61091 & 249.70188 & 15.79693 \\
+        \hline
+        6 & Linear & RKF & Robust & 13.63839 & 250.71404 & 15.82796 \\
+        \hline
+    \end{tabular}
+    \label{tab:reference}
+\end{table}
+
+Possiamo notare  come la differenza nelle prestazioni ottenute utilizzando le due modalità di validazione \textit{KF e RKF} siano
+a favore per la tecnica  \textbf{K-fold}. \\
+Del resto, applicando una delle 3 tecniche di scaling non si nota nessuna differenza sostanziale.

@@ -1,0 +1,34 @@
+\subsection{Algoritmo scelto}
+\fancyhead[]{}
+\fancyhead[R]{Algoritmo scelto}
+
+In base ai vari test e alle metriche prodotte, si è deciso di creare un \textbf{Lasso Regressor} applicando la \textbf{RobustScaler}.\\
+La scelta dello scaler non inficiava troppo sulle prestazioni del modello in quanto si è visto che non comportava una varianza tra i residui medi.
+Tale modello per renderlo utilizzabile all'interno di MetaClass deve essere convertito in un file \textbf{PMML}. \\ \\
+PMML, acronimo di Predictive Model Markup Language, è uno standard XML (e più recentemente anche JSON) che fornisce una rappresentazione standardizzata per modelli di machine learning e modelli statistici. L'obiettivo principale di PMML è consentire la portabilità dei modelli tra diverse piattaforme e ambienti software. \\ \\ 
+Per fare la conversione è necessario prendere il nostro modello addestrato e inserirlo in una \textbf{PMMLPipeline} \\
+\begin{lstlisting}
+# Adattamento e trasformazione dei dati con RobustScaler
+scaler = RobustScaler()
+X_scaled = scaler.fit_transform(X)
+
+# Creazione del modello di regressione con LassoRegression
+model = lassoReg
+model.fit(X_scaled, y)
+
+# Creazione del PMMLPipeline con il modello già addestrato
+pipeline = PMMLPipeline([("Regression", model)])
+\end{lstlisting}
+
+Una pipeline in informatica e nell'ambito del machine learning è una sequenza di passaggi o operazioni che vengono eseguiti in successione su un set di dati. In particolare, nel contesto del machine learning, una pipeline può essere utilizzata per organizzare in modo strutturato il flusso di lavoro che coinvolge la preparazione dei dati e la creazione del modello. \\
+Tuttavia per vari problemi di compilazione si è deciso di utilizzare la pipeline come mezzo di \textbf{conversione} del modello già addestrato, piuttosto che creare un flusso di operazione che partisse dalla preparazione dei dati e finisse alla creazione del modello. \\
+Dopo ciò, si hanno tutti i requisiti per creare il file PMML: \\
+\begin{lstlisting}
+# Tentativo di estrazione del pipeline in un file PMML con gestione delle eccezioni
+try:
+    sklearn2pmml(pipeline, "RegressoreDurataMeeting.pmml", with_repr=True)
+except Exception as e:
+    print("Si e' verificato un errore durante l'estrazione del pipeline in un file PMML:")
+    print(e)
+\end{lstlisting}
+Tale file viene utilizzato per fare stime nel momento in cui vi sono meeting da creare. Il tutto è stato integrato in una classe Java che verrà descritta in modo più accurato nel paragrafo \ref{paragrafo 5.1}

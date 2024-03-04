@@ -1,0 +1,38 @@
+\subsubsection{Ridge Regression}
+\fancyhead[]{}
+\fancyhead[R]{Ridge Regression}
+
+In fine è stato analizzato l’algoritmo di Ridge Regression anche conosciuto come \textit{Tikhonov
+regularization}. E’ una versione regolarizzata della Regressione Lineare, aggiungendo un
+termine di regolarizzazione "alpha" alla \textit{cost function}, l’algoritmo di apprendimento viene
+forzato a tenere i weight quanto più bassi possibili. 
+
+La Ridge Regression è in grado di determinare l’importanza di una feature tramite un fattore
+di penalità, in particolare L2 (squared size) penalizza il quadrato del valore dei coefficienti
+del modello. In pratica questo produce coefficienti piccoli, ma nessuno di loro è mai annullato.
+Quindi i coefficienti non sono mai 0. Il fenomeno è denominato \textit{feature shrinkage}.
+
+\begin{table}[!htbp]
+    \centering
+    \caption{Ridge Regression}
+    \begin{tabular}{|c|c|c|c|c|c|c|}
+        \hline
+        Test & Regressor & Alg & Scaler & MAE & MSE & RMSE \\
+        \hline
+        1 & Ridge & KF & ZScore & 13.62292 & 249.80115 & 15.80010 \\
+        \hline
+        2 & Ridge & RKF & ZScore & 13.62760 & 250.12743 & 15.81275 \\
+        \hline
+        3 & Ridge & KF & MinMax & 13.62245 & 249.78355 & 15.79954 \\
+        \hline
+        4 & Ridge & RKF & MinMax & 13.62699 & 250.10058 & 15.81189 \\
+        \hline
+        5 & Ridge & KF & Robust & 13.62278 & 249.79550 & 15.79992 \\
+        \hline
+        6 & Ridge & RKF & Robust & 13.62738 & 250.11838 & 15.81246 \\
+        \hline
+    \end{tabular}
+    \label{tab:random_forest}
+\end{table} 
+
+Anche qui possamo notare che le metriche sono molto vicine a quelle del Lasso Regression e della Linear Regression.
