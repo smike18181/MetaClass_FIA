@@ -2,3 +2,37 @@
 \fancyhead{}    % reset header
 \fancyhead[R]{Stima durata dei meeting}
 \label{paragrafo 5.1}
+
+L'essenza del nostro regressore, come è stato spiegato nel paragrafo \ref{paragrafo 1.3}, è quella di rilevare i dati di un'utente per poi stimare la durata ideale di un meeting che tale utente preferisce seguire.
+La stima però deve essere eseguita su tutti gli utenti presenti in una stanza per far si che l'organizzatore di una stanza, possa essere a conoscenza della durata ideale media da effettuare in una determinata stanza.
+Il modello quindi deve effettuare stime su ogni partecipante della stanza per poi ritornare una durata media dei meetings. Qui sotto riportato un'estratto di codice di metaclass che consente di fare ciò: \\
+\begin{lstlisting}[caption=Stima durata meeting ideale]
+  @Override
+  public Double getDurataMeeting(Long idStanza) throws RuntimeException403, ServerRuntimeException {
+    // controllo la stanza se esiste
+    Stanza s;
+    if ((s = stanzaRepository.findStanzaById(idStanza)) == null) {
+      throw new RuntimeException403("non è possibile effettuare la stima: stanza non trovata");
+    }
+    // mi recapito la lista di utenti in stanza
+    List<Utente> users;
+    if ((users = statoPartecipazioneRepository.findUtentiInStanza(s.getId())) == null) {
+      throw new ServerRuntimeException(
+          "non è possibile effettuare la stima: " + "errore nella ricerca dei partecipanti");
+    }
+    double mediaDuration = 0;
+
+    for (Utente u : users) {
+      mediaDuration += requestPrediction(u);
+    }
+    return mediaDuration / users.size();
+  }
+\end{lstlisting}
+Dove vengono estratti tutti gli utenti presenti in stanza per poi invocare il metodo \textit{requestPrediction()}
+che prende in input un utente ed effettua la stima su di esso.
+
+Il tutto viene fatto per tutti gli utenti e le stime eseguite vengono sommate nella variabile \textit{mediaDuration} per poi ritornare la media di tali stime. \\
+Il metodo requestPrediction() ha il compito di preparare i dati dell'utente per renderli compatibili con il regressore (memorizzato in un file PMML) per poi effettuare la stima. 
+
+
+\href{https://github.com/Everysimo/MetaClass}{\textcolor{blue}{https://github.com/Everysimo/MetaClass}} per ulteriori dettagli sul codice relativo alle stime.

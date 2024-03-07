@@ -2,3 +2,65 @@
 \fancyhead{}    % reset header
 \fancyhead[R]{Aggiunta istanze}
 \label{paragrafo 5.2}
+
+MetaClass,come descritto prima, consente la compilazione di un questionario, dopo un meeting a cui ha partecipato l'utente, è terminato.
+I dati del questionario vengono presi per incrementare il dataset, infatti oltre al motionSickenss e al Immersivity Level, si prelevano dati come età e sesso.
+Per poter inserire la tupla nel dataset ci occorre però un modo per poter ricavare lo \textit{UserID} dell'ultima istanza del dataset per incrementarla e farla diventare lo \textit{UserID} della prossima tupla da inserire.
+Per fare ciò è stato necessario utilizzare la libreria \textit{org.apache.commons} per poter fare la lettura e la scrittura in un file formato csv (formato di estrazione del dataset). \\
+\begin{lstlisting}
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVPrinter;
+import org.apache.commons.csv.CSVRecord;
+\end{lstlisting}
+Questi sono gli oggetti utilizzati per accedere a un file csv, in particolare:
+\par{
+\begin{itemize}
+    \item \textbf{CSVFormat}:
+     Questo oggetto definisce il formato del file CSV, specificando opzioni come il separatore di colonne, il carattere di escape e altri parametri di formattazione. Viene utilizzato per configurare la lettura e la scrittura dei file CSV.
+     \item \textbf{CSVParser}:
+     Questo oggetto è responsabile della lettura di un file CSV, analizzandolo e convertendo i dati in oggetti di tipo CSVRecord. Utilizza il CSVFormat per interpretare correttamente la struttura del file CSV.
+     \item \textbf{CSVPrinter}:
+      Questo oggetto viene utilizzato per la scrittura di dati in un file CSV. Accetta dati in forma di oggetti CSVRecord e li formatta secondo il CSVFormat specificato, scrivendoli nel file CSV di output.
+      \item \textbf{CSVRecord}:
+      Rappresenta una singola riga di dati in un file CSV. I valori dei singoli campi sono accessibili attraverso metodi come get o tramite l'indicizzazione. Viene utilizzato sia durante la lettura dei file CSV da CSVParser che durante la scrittura da CSVPrinter.
+\end{itemize}
+}
+
+Ottenuta la tupla risultante, è possibile inserirla nel dataset: \\
+
+\begin{lstlisting}
+    // Aggiunta della nuova tupla di valori al CSV
+        csvPrinter.printRecord(
+            ultimoUserId + 1, // UserID
+            periodo.getYears(), // Age
+                (u.getSesso().equals("M") ? 2 : (u.getSesso().equals("F")  ? 1 : 0)), // Gender
+            null, // VR Headset (non utilizzato e rimosso nella feature selection)
+            (double) durata.toMinutes(), // Duration
+            immersionLevel, // ImmersionLevel
+            motionSickness); // MotionSickness
+\end{lstlisting}
+
+Da come si può notare il sesso è stato espresso come un valore numerico (per consentire lo scaling durante il training del modello) e la cella relativa all'headSet è nulla in quanto verrà eliminata a prescindere durante le feature selection. \\
+Infine una questione importante ce l'ha l'attributo Duration che è stato ricavato andando a fare una media di tutti i minuti in cui è stato l'utente all'interno dei meetings (considerando però anche le altre stanze in cui ha accesso).  
+
+Infine dopo l'inserimento di dati era necessario stabilire quando effetturare il \textbf{retraining del modello} avendo a disposizione 2 alternative:
+\par{
+\begin{itemize}
+   \item \textbf{allenarlo dopo ogni utente aggiunto}
+   \item \textbf{allenarlo dopo n inserimenti}
+\end{itemize}
+}
+A primo impatto sembra che la prima opzione sia la migliore, in quanto si ha fin da subito il modello riallenato e quindi fornire stime fin da subito più accurate, ma questo porta come svantaggio un esecuzione lenta nella compilazione del questionario. In parole povere, quando l'utente compila un questionario, dovrà attendere diversi secondi per avere un feedback di avvenuta compilazione, rendendo quindi il sistema meno usabile.
+A valle di ciò si è deciso di implentare la seconda opzione, dove \textbf{ad ogni 100 inserimenti} veniva inserita effettuato il retraining:
+\begin{lstlisting}
+     //incremento il contatore che mi tiene traccia di quante tuple vengono aggiunte
+        counter++;
+      //ogni 100 inserimenti avviene il retraining
+      if ((counter% 100) == 0) {
+        // ri-training del modello
+        trainingModel();
+      }
+\end{lstlisting}
+Per fare ciò è servito un contatore statico che veniva incrementato ad ogni inserimento, poi in un if veniva controllato se il contatore ha un modulo pari a 100 (cioè se sono stati inserite 100 tuple).
+
