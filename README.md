@@ -21,4 +21,18 @@ I meeting e le stanze a cui si fa riferimento sono delle entità logiche definit
 MetaClass a sua volta è una companion app di MetaClassVR, ovvero l'estensione di tutto ciò che si è detti (più ulteriori funzionalità) nel mondo della realtà aumentata. Per poter utilizzare tale applicativo è necessario l'ausilio di un VisoreVR che può portare problemi fisiologici (per esempio nausea, mal di testa etc.) a utenti sia esperti che inesperti.
 MetaClass_FIA vuole venire incontro a queste problematiche, cercando di stimare un durata di utilizzo ideale del visore durante lo scheduling (organizzazione) di un meeting.
 
+## Guida all'installazione
+
+### 1. Clonare il repository
+
+Per prima cosa, clona il repository sul tuo computer utilizzando il comando `git clone` e subito dopo l'url del repository:
+```sh
+git clone https://github.com/smike18181/MetaClass_FIA
+
+
+
+
+
+
+
 
