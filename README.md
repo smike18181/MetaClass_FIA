@@ -46,8 +46,41 @@ Prima di tutto è necessario aver scaricato il linguaggio 'Python'. Per scaricar
 Per poter accedere al notebook è necessario installare jupiter Notebook al seguente link: https://jupyter.org per poi avere la possibilità di poter modificare e utilizzare l'intero progetto. 
 Prima di fare ciò però è necessario installare le seguenti librerie:
 
+pandas: È una libreria Python che fornisce strutture dati e strumenti di analisi dati per manipolare e analizzare dati in modo rapido e facile. È particolarmente utile per la pulizia, l'esplorazione e la manipolazione di dati tabulari.
 ```sh
-import pandas as pd
+pip install pandas
+```
+matplotlib: È una libreria per la visualizzazione dei dati che consente di creare grafici e visualizzazioni di alta qualità in Python. È molto flessibile e offre un'ampia gamma di opzioni per personalizzare i grafici.
+```sh
+pip install matplotlib
+```
+scipy: È una libreria Python per la matematica scientifica e l'ingegneria che fornisce funzioni per l'ottimizzazione, l'algebra lineare, l'interpolazione, la trasformata di Fourier, la statistica e molto altro ancora.
+```sh
+pip install scipy
+```
+seaborn: È una libreria Python basata su matplotlib per la visualizzazione dei dati statistici. Offre una sintassi ad alto livello per creare grafici attraenti e informativi, ed è particolarmente utile per esplorare e visualizzare relazioni complesse nei dati.
+```sh
+pip install seaborn
+```
+statsmodels: È una libreria Python che fornisce strumenti per la stima di modelli statistici, la condotta di test statistici e l'analisi dei dati. È particolarmente utile per la modellazione statistica e l'analisi dei dati.
+```sh
+pip install statsmodels
+```
+yellowbrick: È una libreria Python per la visualizzazione dei modelli di machine learning che offre strumenti per visualizzare metriche di prestazione, diagnostiche dei modelli e altro ancora. È progettata per essere facile da usare e integrarsi con altri strumenti di machine learning in Python.
+```sh
+pip install yellowbrick
+```
+termcolor: È una libreria Python per colorare il testo nelle console Python. È utile per migliorare la leggibilità del testo nelle console e nei terminali.
+```sh
+pip install termcolor
+```
+scikit-learn: È una libreria Python per l'apprendimento automatico (machine learning) che offre una vasta gamma di algoritmi di apprendimento supervisionato e non supervisionato. È progettata per essere semplice da usare e integrarsi con altre librerie Python per l'analisi dei dati.
+```sh
+pip install scikit-learn
+```
+sklearn2pmml: È una libreria per la conversione di modelli scikit-learn in PMML (Predictive Model Markup Language), un formato standard per la rappresentazione dei modelli di apprendimento automatico. È utile quando si desidera distribuire modelli scikit-learn su piattaforme che supportano PMML.
+```sh
+pip install sklearn2pmml
 ```
 
 
