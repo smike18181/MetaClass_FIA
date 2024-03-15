@@ -1,0 +1,16 @@
+\subsection{Analisi del problema}
+\fancyhead{}    % reset header
+\fancyhead[R]{Analisi del problema}
+\label{paragrafo 1.3}
+\par{
+Una soluzione al problema inerente sarebbe potuta essere sviluppata mediante una semplice media della durata di tutti i meeting svolti dagli utenti, tuttavia tale soluzione avrebbe comportato diverse limitazioni:
+\begin{itemize}
+    \item questa implementazione non tiene conto di caratteristiche specifiche dell'utente, come ad esempio una fascia d'età più bassa che può essere maggiormente predisposta ad una durata più lunga di utilizzo del visore;
+    \item non ci sarebbe stato un accesso immediato ad una quantità di dati adeguata;
+    \item l'output risultante potrebbe risultare impreciso, non avendo l'operazione definita una quantità di dati eterogenei sufficientemente grande per fornire un risultato attendibie;
+\end{itemize}
+Date queste limitazioni, si è deciso di affrontare il problema in esame adottando tecniche di Machine Learning in grado di effettuare la \textbf{user segmentation}, andando cioè a suddividere gli utenti in gruppi distinti in base a caratteristiche condivise (e.g. sesso, età, motion sickness level).\\
+Sono stati presi in analisi diversi algoritmi di Machine Learning, la cui scelta è infine ricaduta su di un problema di regressione lineare multipla.\\
+Idea di base è quella di raccogliere i report inseriti da ogni utente all'interno del sistema, unitamente alla durata del meeting per singolo utente che viene presa direttamente tramite l'applicativo VR, e dati relativi a sesso ed età per singolo utente automaticamente dal sistema stesso, il tutto viene fatto al termine di ogni meeting.\\
+Sulla base di questi dati raccolti verrà poi fatta la predizione della durata consigliata per il meeting in fase di scheduling.
+}

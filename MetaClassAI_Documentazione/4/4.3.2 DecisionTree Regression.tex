@@ -1,0 +1,34 @@
+\subsubsection{DecisionTree Regression}
+\fancyhead[]{}
+\fancyhead[R]{DecisionTree Regression}
+
+In seguito alla realizzazione del modello utilizzante un semplice algoritmo di Regressione
+Lineare, le sue prestazioni sono state confrontate con altri modelli che fanno utilizzo di diversi
+algoritmi di regressione. Il primo algoritmo con cui è stato confrontato è stato il \textbf{Decision Tree}, che non si limita a predire dati con vincoli di linearità, ma permette anche di predire
+valori che si presentano sotto forma di curve.\\
+Riportiamo di seguito i risultati ottenuti:
+\begin{table}[!htbp]
+    \centering
+    \caption{DecisionTree Regression}
+    \begin{tabular}{|c|c|c|c|c|c|c|}
+        \hline
+        Test & Regressor & Alg & Scaler & MAE & MSE & RMSE \\
+        \hline
+        1 & DecisionTree & KF & ZScore & 18.90721 & 512.38004 & 22.62610 \\
+        \hline
+        2 & DecisionTree & RKF & ZScore & 18.57162 & 508.82534 & 22.54597 \\
+        \hline
+        3 & DecisionTree & KF & MinMax & 19.22090 & 529.42730 & 22.99655 \\
+        \hline
+        4 & DecisionTree & RKF & MinMax & 18.58814 & 509.21055 & 22.55407 \\
+        \hline
+        5 & DecisionTree & KF & Robust & 19.05921 & 518.14221 & 22.75477 \\
+        \hline
+        6 & DecisionTree & RKF & Robust & 18.56476 & 508.42116 & 22.53678 \\
+        \hline
+    \end{tabular}
+    \label{tab:reference}
+\end{table}
+
+Si può facilmente notare come i risultati ottenuti siano tutti peggiori rispetto a quelli
+ottenuti con l’algoritmo di regressione lineare.

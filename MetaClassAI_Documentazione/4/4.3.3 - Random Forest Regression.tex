@@ -1,0 +1,34 @@
+\subsubsection{RandomForest Regression}
+\fancyhead[]{}
+\fancyhead[R]{RandomForest Regression}
+
+Il confronto del modello è continuato andando a testare le prestazioni utilizzando l’algoritmo RandomForest Regression. Questo è un algoritmo di tipo "ensemble", cioè esegue \(n\) volte (nel nostro caso, \(n = 100\)) l’algoritmo Decision Tree Regression, ogni albero decisionale è creato in modo autonomo ed effettua le sue personali predizioni. In seguito, le predizioni finali sono poi ottenute tramite una media di quelle effettuate dai singoli alberi. 
+
+Di seguito riportiamo i risultati:
+\begin{table}[!htbp]
+    \centering
+    \caption{RandomForest Regression}
+    \begin{tabular}{|c|c|c|c|c|c|c|}
+        \hline
+        Test & Regressor & Alg & Scaler & MAE & MSE & RMSE \\
+        \hline
+        1 & RandomForest & KF & ZScore & 14.51364 & 300.07241 & 17.31909 \\
+        \hline
+        2 & RandomForest & RKF & ZScore & 14.53357 & 300.50807 & 17.32987 \\
+        \hline
+        3 & RandomForest & KF & MinMax & 14.55678 & 301.34773 & 17.35545 \\
+        \hline
+        4 & RandomForest & RKF & MinMax & 14.49374 & 299.76998 & 17.30884 \\
+        \hline
+        5 & RandomForest & KF & Robust & 14.59897 & 303.01378 & 17.40361 \\
+        \hline
+        6 & RandomForest & RKF & Robust & 14.51948 & 300.19092 & 17.32114 \\
+        \hline
+    \end{tabular}
+    \label{tab:random_forest}
+\end{table} 
+
+\vspace{10pt} 
+
+Notiamo come in questo caso i risultati ottenuti siano notevolmente migliori rispetto al DecisionTree Regressor. \\
+Di contro, i tempi di elaborazione dei risultati tramite questa tecnica sono notevolmente aumentati.

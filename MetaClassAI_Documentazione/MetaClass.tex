@@ -1,0 +1,217 @@
+\documentclass[a4paper, twoside, openright]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english,italian]{babel}
+\usepackage{graphicx}
+\usepackage{lipsum}
+\usepackage[a4paper,top=3cm,bottom=3cm,left=3cm,right=3cm]{geometry}
+\usepackage[fontsize=12pt]{scrextend}
+\raggedbottom
+\linespread{1.25}
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+\usepackage{hyperref}
+
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{caption}
+
+% Definisci i colori che desideri utilizzare
+\definecolor{codebackground}{rgb}{0.95,0.95,0.95}
+\definecolor{codeframe}{rgb}{0.75,0.75,0.75}
+\definecolor{codekeyword}{rgb}{0.37,0.08,0.25}
+
+% Impostazioni per il blocco di codice
+\lstset{
+    language=Python,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{codekeyword}\bfseries,
+    backgroundcolor=\color{codebackground},
+    frame=single,
+    rulecolor=\color{codeframe},
+    breaklines=true,
+    showstringspaces=false,
+    captionpos=b,
+}
+
+
+\pagestyle{fancy}
+\fancypagestyle{plain}{%
+  \renewcommand{\headrulewidth}{15pt}%
+  \fancyhf{}%
+}
+
+\usepackage{subfig}
+\usepackage{float}
+\graphicspath{ {./images/} }
+
+\definecolor{linkColor}{RGB}{2,11,120}
+\definecolor{printLinkColor}{RGB}{0,0,0}
+
+\usepackage[colorlinks=true, allcolors=printLinkColor]{hyperref}
+\newcommand\anchor[2]{%
+  \href{#2}{#1}\footnote{\url{#2}}%
+}
+
+\usepackage{tgschola}
+
+\definecolor{bgTitleRed}{RGB}{85,45,50}
+\fancyhf{}
+\fancyfoot[R]{\thepage}
+
+
+\begin{document}
+
+%caption dei listings è in bold
+\captionsetup[lstlisting]{labelfont={bf}}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=7cm]{img/logo.png}
+\end{figure}
+
+\begin{center}
+    \LARGE{UNIVERSITÀ DI SALERNO}
+    \vspace{1mm}
+    \\ \large{DIPARTIMENTO DI INFORMATICA }
+    \vspace{5mm}
+\end{center}
+
+% Titolo e
+\vspace{10mm}
+\begin{center}
+    {\LARGE{\bf \textit{MetaClassAI}\\\vspace{5mm} Regressore per la stima della durata ideale dei meeting}}
+\end{center}
+
+\vspace{5mm}
+\begin{center}
+    \centering
+    \large{Repository GitHub:}
+    \href{https://github.com/smike18181/MetaClass_FIA}{\textcolor{blue}{https://github.com/smike18181/MetaClass\_FIA}}
+\end{center}
+
+\vspace{20mm}
+
+% Definzione autori
+\begin{center}
+        {\centering
+        \large {Compilato da:} \\
+        \vspace{2mm}
+        \normalsize \textbf{Pesce Michele} \\
+        \vspace{2mm}
+        \normalsize \textbf{Alberti Salvatore} \\
+        \vspace{2mm}
+        \normalsize \textbf{Gatto Francesco} \\
+        \vspace{2mm}
+        \normalsize \textbf{Cavaliere Domenico} \\}   
+\end{center}    
+
+% Index page
+\newpage
+\fancyhead[R]{ Indice } %RO=right odd, LE=left even
+\tableofcontents
+
+% Footer setting
+\newpage
+\fancyfoot[R]{\thepage}
+
+% Chapters
+\input{1/1 - Definizione del problema}
+\newpage
+\input{2/2 - Dataset}
+\newpage
+\input{3/3 - Ingegnerizzazione dei dati}
+\newpage
+\input{4/4 - Soluzione al problema}
+\newpage
+\input{5/5 - Interazione con Metaclass}
+\newpage
+\input{6/6 - Glossario}
+\newpage
+
+
+% End of document
+\end{document}
+
+
+EXAMPLES:
+
+LINK EXAMPLE
+\anchor{Name External Link}{https://www.google.com/}
+
+CODE EXAMPLE
+\begin{bashCode}{Example Code Block}
+    int a = 5;
+\end{bashCode}
+to insert: %\input{path.tex}
+
+MONOSPACE INLINE TEXT EXAMPLE
+\texttt{Example Text}
+
+MONOSPACE TEXT EXAMPLE
+\begin{verbatim}
+    monospaced text
+\end{verbatim}
+
+MATRIX EXAMPLE
+$\begin{bmatrix}
+    a & b & c\\
+    d & f & g
+\end{bmatrix}$ · 
+$\begin{bmatrix}
+    a & b & c\\
+    d & f & g
+\end{bmatrix}$ = 
+$\begin{bmatrix}
+    a & b & c\\
+    d & f & g
+\end{bmatrix}$
+
+IN-LINE EQUATION EXAMPLE
+\(x^n + y^n = z^n\)
+
+STAND-ALONE EQUATION EXAMPLE
+\[ x^n + y^n = z^n \]
+
+IMAGE EXAMPLE
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{image.png}
+    \caption{caption}
+    \label{fig:reference}
+\end{figure}
+
+SIDE IMAGES EXAMPLE
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{image1.png}
+        \caption{caption1}
+        \label{fig:reference1}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{image2.png}
+        \caption{caption2}
+        \label{fig:reference2}
+    \end{subfigure}
+    \caption{total-caption}
+    \label{fig:total-reference}
+\end{figure}
+
+TABLE EXAMPLE
+\begin{table}[!htbp]
+    \centering
+    \captionsetup{justification=centering}
+    \begin{tabular}{|p{4.5cm}|p{9.5cm}|}
+        \hline
+        a1 & a2\\
+        \hline
+        b1 & b2 \\
+        \hline
+    \end{tabular}
+    \caption{caption}
+    \label{tab:reference}
+\end{table}

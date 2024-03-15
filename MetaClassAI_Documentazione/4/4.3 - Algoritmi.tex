@@ -1,0 +1,70 @@
+\subsection{Algoritmi}
+\fancyhead{}    % reset header
+\fancyhead[R]{Algoritmi}
+\label{paragrafo 4.3}
+
+Prima di parlare degli algoritmi è necessario trattare come viene effettuata la generazione del modulo.
+Il tutto viene fatta da una funzione chiamata \textit{generateModel()}:\\
+
+\begin{lstlisting}
+   #funzione per generare il modello, divisione training e test, features scaling, selection
+   def generateModel(alg, scaler, model, select)
+\end{lstlisting}
+
+
+
+\par{
+\begin{itemize}
+    \item \textbf{alg}: metodo di convalida utilizzato nella validazione del modello
+    \item \textbf{scaler}: tecnica di normalizzazione dei dati usata
+    \item \textbf{model}: algoritmo di regressione
+    \item \textbf{select}: insieme delle feature selezionate 
+\end{itemize}
+}
+
+L'obiettivo del metodo è quello di effettuare la divisione del dataset in test e training set per poi eseguire per poi applicare operazioni di data engeening per preparare i dati. \\
+\begin{lstlisting}
+    # suddivisione in training e test test
+    X_train, X_test = X.iloc[train_index], X.iloc[test_index]
+    y_train, y_test = y.iloc[train_index], y.iloc[test_index]
+    #feature scaling sui traing test
+    X_train_z = scaler.fit_transform(X_train)
+    X_test_z = scaler.transform(X_test)
+    #applicazione feature selection su train_z
+    X_train_z = select.fit_transform(X_train_z, y_train)
+    X_test_z = select.transform(X_test_z)
+\end{lstlisting}
+La suddivisione avviene andando a scegliere il numero di partizioni k per poi applicare l'algoritmo di suddivisione del dataset.\\
+\begin{lstlisting}
+    #numero record nel dataset
+    k=len(df)
+    #calcolo k ideale da usare nelle tecniche di validazione deve essere il 30% della lunghezza del dataset
+    k= (k/(k*0.3))
+   #Kf divisione dataset per k gruppi per testare mediante due algoritmi Kfold-RepeateKFold
+   kf = KFold(n_splits=int(np.ceil(k)),random_state=42, shuffle=True)
+   #rKf con k gruppi, e 10 ripetizioni
+   rkf = RepeatedKFold(n_splits=int(np.ceil(k)), n_repeats=100, random_state=42)
+\end{lstlisting}
+
+Da come si vede dal codice, vengono applicati i metodi descritti nel paragrafo \ref{paragrafo 4.2.1}. \\
+A questo punto l'unica cosa da fare è l'addestramento è la validazione:
+\begin{lstlisting}
+     #training dell'algoritmo sui 
+     training set
+    clone_model.fit(X_train_z,y_train)
+    #validazione modello e applicazione predizione sui testSet
+    y_pred = clone_model.predict(X_test_z)
+\end{lstlisting}
+Questo blocco è rinchiuso in un \textit{for}, quindi il valore predetto \textit{ypred} è unico. \\
+Col valore presetto si ricavano i \textbf{residui} descritti nel paragrafo \ref{paragrafo 4.2.1} andando poi a ricavare le 3 metriche di valutazione dei modelli.
+
+\begin{lstlisting}
+     metrics1.append(
+        Metrics1(metrics.mean_absolute_error(y_test,y_pred),
+                 metrics.mean_squared_error(y_test,y_pred),
+                 np.sqrt(metrics.mean_squared_error(y_test,y_pred))
+                 )
+        )
+  return metrics1
+\end{lstlisting}
+metrics è un'istanza della classe \textit{MetricsResultContainer} che consente di poter stampare le metriche e visualizzare i grafici in caso di utilizzo di regressione lineare. \\
