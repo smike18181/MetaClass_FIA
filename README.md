@@ -7,9 +7,17 @@ MetaClass_FIA è un progetto univeristario che ha lo scopo di:
 4. Applicazione del metodo empirico su vari Regressori definendo un metodo opportuno per la validazione
 5. Intregazione del modulo con l'applicativo MetaClass.
 
-Nella repository in "MetaClassAI_Documentazione" è presente una documentazione in cui vengono mostrati in modo dettagliato tutti i passaggi descritti prima includendo anche righe di codice estratti da MetaClass.
+## Com'è strutturata la repository?
+La nostra repository presenta una cartella chiamata 'MetaClassAI_Documentazione' in cui è presente la documentazione relativa al regressore.
+Il documento è stato realizzato in LaTeX e come editor è stato utilizzato 'Overleaf' (motivo per il quale ha una struttura divisa in varie sezioni).
+Il documento finale è stato esportato in formato pdf e si chiama 'MetaClass_FIA.pdf'
 
-Infine saranno presenti delle immagini che mostrano i plot utilizzati per l'analisi dei dati. 
+Nella cartella file è presente il dataset utilizzato per allenare e testare il modello. All'apertura su github è possibile vedere i dati in forma tabellare con le intestazioni delle varie colonne (feature) del dataset. 
+
+Fuori dalla cartella è presente il file 'MetaClass_Meeting_IA.ipynb' che è il cuore pulsante del nostro progetto. E' stato sritto su Jupiter Notebook e mostra l'intera fase di analisi e progettazione del modello e dei dati che lo compongono.
+Nell'ultimo blocco di codice è possibile vedere come viene esportato il modello allenato in un file PMMl ('RegressoreDurataMeeting.pmml') che verrà utilizzato per effettuare le stime in MetaClass.
+
+Infine sono presenti tutte le immagini generate dal notebook citato prima. Queste immagini sono plot sui dati e sui risultati degli algoritmi utilizzati per il metodo empirico.
 
 ## Obiettivo
 
@@ -28,9 +36,19 @@ MetaClass_FIA vuole venire incontro a queste problematiche, cercando di stimare 
 Per prima cosa, clona il repository sul tuo computer utilizzando il comando `git clone` e subito dopo l'url del repository:
 ```sh
 git clone https://github.com/smike18181/MetaClass_FIA
+```
+All'interno di questa repository ci sono file che non richiedono il download di librerie in aprticolare, tranne il file 'MetaClass_Meeting_IA.ipynb'
 
+### 2. Installazioni librerie
 
+Prima di tutto è necessario aver scaricato il linguaggio 'Python'. Per scaricarlo si può accedere al seguente link: https://www.python.org/downloads/
 
+Per poter accedere al notebook è necessario installare jupiter Notebook al seguente link: https://jupyter.org per poi avere la possibilità di poter modificare e utilizzare l'intero progetto. 
+Prima di fare ciò però è necessario installare le seguenti librerie:
+
+```sh
+import pandas as pd
+```
 
 
 
